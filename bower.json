@@ -1,0 +1,35 @@
+{
+  "name": "ham.exam",
+  "description": "Ham Radio Certification Examination",
+  "main": "app/app.js",
+  "authors": [
+    "kk6ugn <kk6ugn@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SpikE4343/ham.exam",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material-data-table": "^0.10.x",
+    "angular-route": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "angular": "^1.5.5",
+    "angular-material": "^1.0.9",
+    "angular-material-icons": "^0.7.0",
+    "material-design-icons": "^2.2.3",
+    "feathers-client": "^1.5.2",
+    "socket.io-client": "^1.4.8"
+  },
+  "resolutions": {
+    "angular-material": "^1.0.9",
+    "angular": "~1.4.8",
+    "angular-material-icons": "^0.7.0"
+  }
+}
