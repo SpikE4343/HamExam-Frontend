@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HamExam</title>
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"> -->
+    <link href="lib/lib.min.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
+
+
+</head>
+<body ng-app="app" ng-controller="IndexPageController" ng-cloak>
+  <div layout="row" flex layout-fill>
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z1"
+                md-component-id="nav"
+                md-is-locked-open="$mdMedia('gt-sm')">
+      <md-toolbar class="md-whiteframe-z1"
+                  layout="row">
+        <div class="md-toolbar-tools" flex>
+          <md-button class="md-icon-button"
+                     aria-label="Settings"
+                     ng-click="toggleNavDrawer()">
+            <md-icon>settings_input_antenna</md-icon>
+          </md-button>
+        </div>
+        <!-- <div class="md-toolbar-tools" layout="row" flex ng-show="c.isNavDrawerOpen()">
+          <md-button class="md-icon-button"
+                     aria-label="Open"
+                     ng-click="c.open()">
+            <md-tooltip>Open</md-tooltip>
+            <md-icon>folder_open</md-icon>
+          </md-button>
+          <md-button class="md-icon-button"
+                     aria-label="Save"
+                     ng-click="c.save()"
+                     ng-show="c.isLockedOpen()">
+            <md-tooltip>Save</md-tooltip>
+            <md-icon>save</md-icon>
+          </md-button>
+        </div> -->
+      </md-toolbar>
+
+      <md-list>
+          <!-- <md-progress-circular
+            ng-show="c.loading"
+            md-mode="indeterminate">
+          </md-progress-circular> -->
+          <!-- <md-list-item
+            layout="row"
+            ui-sref="radios.list"
+            ng-click="c.closeNavDrawer()">
+            <md-icon>view_quilt</md-icon>
+            <h4>All Files</h4>
+          </md-list-item>
+          <md-divider></md-divider> -->
+          <md-list-item
+            ng-repeat="page in pages"
+                        layout="row"
+                        ui-sref="{{page.uiRoute}}"
+                        ng-click="closeNavDrawer()">
+              <md-icon >{{page.icon}}</md-icon>
+              <p class="md-body-2">{{page.name}}</p>
+          </md-list-item>
+      </md-list>
+    </md-sidenav>
+
+    <div layout="column" flex>
+      <md-toolbar class="md-whiteframe-z1">
+        <div class="md-toolbar-tools" layout="row" flex>
+          <div class="md-toolbar-tools" layout="row" flex ng-hide="isNavDrawerOpen()">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleNavDrawer()">
+              <md-tooltip>Menu</md-tooltip>
+              <md-icon>settings_input_antenna</md-icon>
+            </md-button>
+            <!-- <md-button class="md-icon-button"
+                       aria-label="Open"
+                       ng-click="c.open()">
+              <md-tooltip>Open</md-tooltip>
+              <md-icon>folder_open</md-icon>
+            </md-button>
+            <md-button class="md-icon-button"
+                       aria-label="Save"
+                       ng-click="c.save()">
+              <md-tooltip>Save</md-tooltip>
+              <md-icon>save</md-icon>
+            </md-button> -->
+          </div>
+          <span flex></span>
+          <h2><span>HamExam</span></h2>
+          <span flex></span>
+          <!-- <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon>search</md-icon>
+          </md-button>
+          <md-button aria-label="Open Settings">
+            <md-icon>more_vert</md-icon>
+          </md-button> -->
+        </div>
+      </md-toolbar>
+      <div flex ui-view layout-fill></div>
+    </div>
+
+    <script src="lib/lib.min.js"></script>
+    <script src="lib/feathers.min.js"></script>
+    <script src="templates.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
