@@ -19,7 +19,12 @@ var app = angular
         .state('home', {
             //abstract: true,
             url: '/home',
-            templateUrl: 'pages/home.html',
+            //templateUrl: 'pages/home.html',
+            templateProvider: function($templateCache){
+              // simplified, expecting that the cache is filled
+              // there should be some checking... and async $http loading if not found
+              return $templateCache.get('pages/home.html');
+            },
             controller: 'HomeController',
             controllerAs: 'c'
         })

@@ -83,7 +83,7 @@ gulp.task('vendorCSS', function(){
 });
 
 gulp.task('copy-web', function() {
-    gulp.src('./src/**/*.html')
+    gulp.src('./src/index.html')
         .pipe(gulp.dest(dest));
 });
 
@@ -114,7 +114,7 @@ gulp.task('connect', function(){
 gulp.task( 'build', ['clean'], function(){
   gulp.start(
     'scripts',
-  //'templates',
+  'templates',
   'css',
   'copy-web',
   'vendorJS',
