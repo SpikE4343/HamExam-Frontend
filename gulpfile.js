@@ -1,6 +1,10 @@
 var gulp = require('gulp');
 var del = require('del');
+var path = require('path');
 var plugins = require("gulp-load-plugins")({lazy:false});
+
+var dest = './dist';
+var destlib = path.join(dest, 'lib');
 
 //TODO: fonts
 
@@ -18,97 +22,110 @@ gulp.task('scripts', function(){
         .pipe(plugins.jshint.reporter('jshint-stylish'))
         .pipe(plugins.concat('app.js'))
         .pipe(plugins.ngAnnotate())
-        .pipe(gulp.dest('./dist'));
-
-
+        .pipe(gulp.dest(dest));
 });
 
+var fontpath = './lib/material-design-icons/iconfont/MaterialIcons-Regular';
 gulp.task('vendorFonts', function(){
-
+  gulp.src([
+    fontpath+'.eot',
+    fontpath+'.woff',
+    fontpath+'.woff2',
+    fontpath+'.ttf'])
+  .pipe(gulp.dest(destlib +'/fonts'))
 });
-
 
 gulp.task('templates',function(){
     //combine all template files of the app into a js file
     gulp.src(['!./src/index.html',
         './src/**/*.html'])
         .pipe(plugins.angularTemplatecache('templates.js',{standalone:true}))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('css', function(){
-    gulp.src('./src/**/*.css')
+    gulp.src('./src/**/*.less')
+        .pipe(plugins.less())
         .pipe(plugins.concat('app.css'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('vendorJS', function(){
     //concatenate vendor JS files
     gulp.src([
-        '!./lib/**/*.min.js',
-        '!./lib/feathers-client/**/*.js',
-        './lib/**/*.js'])
+        './lib/angular/angular.js',
+        './lib/angular-ui-router/release/angular-ui-router.js',
+        './lib/angular-animate/angular-animate.js',
+        './lib/angular-aria/angular-aria.js',
+        './lib/angular-material/angular-material.js',
+        './lib/angular-material-icons/angular-material-icons.min.js',
+        './lib/angular-material-data-table/dist/md-data-table.min.js',
+        './lib/socket.io-client/socket.io.js',
+        //'./lib/feathers-client/dist/feathers.min.js',
+        '!./lib/feathers-client/**/*.js'])
         .pipe(plugins.concat('lib.min.js'))
         //.pipe(plugins.ngAnnotate())
         //.pipe(plugins.uglify())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(destlib));
 
     gulp.src( ['./lib/feathers-client/dist/*.min.js'])
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(destlib));
 });
 
 gulp.task('vendorCSS', function(){
     //concatenate vendor CSS files
-    gulp.src(['!./lib/**/*.min.css',
-        './lib/**/*.css'])
+    gulp.src([
+        './lib/angular-material/angular-material.min.css',
+        './lib/angular-material-data-table/dist/md-data-table.min.css'])
         .pipe(plugins.concat('lib.min.css'))
         .pipe(plugins.cssnano())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(destlib));
 });
 
-gulp.task('copy-index', function() {
-    gulp.src('./src/index.html')
-        .pipe(gulp.dest('./dist'));
+gulp.task('copy-web', function() {
+    gulp.src('./src/**/*.html')
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('watch',function(){
     gulp.watch([
-        'dist/**/*.html',
-        'dist/**/*.js',
-        'dist/**/*.css'
+        dest+'/**/*.html',
+        dest+'/**/*.js',
+        dest+'/**/*.css'
     ], function(event) {
         return gulp.src(event.path)
             .pipe(plugins.connect.reload());
     });
     gulp.watch(['./src/**/*.js','!./src/**/*test.js'],['scripts']);
-    gulp.watch(['!./src/index.html','./src/**/*.html'],['templates']);
+    //gulp.watch(['!./src/index.html','./src/**/*.html'],['templates']);
     gulp.watch('./src/**/*.css',['css']);
-    gulp.watch('./src/index.html',['copy-index']);
+    gulp.watch('./src/index.html',['copy-web']);
 
 });
 
 gulp.task('connect', function(){
   plugins.connect.server({
-      root: ['./dist'],
+      root: [dest],
       port: 8080,
       livereload: true
   });
 });
 
-gulp.task( 'build', [
-  'scripts',
-  'templates',
+gulp.task( 'build', ['clean'], function(){
+  gulp.start(
+    'scripts',
+  //'templates',
   'css',
-  'copy-index',
+  'copy-web',
   'vendorJS',
   'vendorCSS',
-  'vendorFonts'
-]);
-
-gulp.task('clean', function(){
-  return del(['dist/**/*']);
+  'vendorFonts');
 });
 
-gulp.task('default',['bower', 'clean'], function() {
+gulp.task('clean', function(){
+  return del([dest+'/**/*']);
+});
+
+gulp.task('default',/*[ 'bower' ],*/ function() {
   gulp.start('build', 'connect', 'watch');
 });
