@@ -25,7 +25,7 @@ gulp.task('scripts', function(){
         .pipe(gulp.dest(dest));
 });
 
-var fontpath = './lib/material-design-icons/iconfont/MaterialIcons-Regular';
+var fontpath = './lib/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular';
 gulp.task('vendorFonts', function(){
   gulp.src([
     fontpath+'.eot',
@@ -76,6 +76,7 @@ gulp.task('vendorCSS', function(){
     //concatenate vendor CSS files
     gulp.src([
         './lib/angular-material/angular-material.min.css',
+        './lib/angular-material-icons/angular-material-icons.css',
         './lib/angular-material-data-table/dist/md-data-table.min.css'])
         .pipe(plugins.concat('lib.min.css'))
         .pipe(plugins.cssnano())
@@ -91,14 +92,15 @@ gulp.task('watch',function(){
     gulp.watch([
         dest+'/**/*.html',
         dest+'/**/*.js',
-        dest+'/**/*.css'
+        dest+'/**/*.css',
+        dest+'/**/*.less'
     ], function(event) {
         return gulp.src(event.path)
             .pipe(plugins.connect.reload());
     });
     gulp.watch(['./src/**/*.js','!./src/**/*test.js'],['scripts']);
-    //gulp.watch(['!./src/index.html','./src/**/*.html'],['templates']);
-    gulp.watch('./src/**/*.css',['css']);
+    gulp.watch(['!./src/index.html','./src/**/*.html'],['templates']);
+    gulp.watch(['./src/**/*.css', 'src/**/*.less'],['css']);
     gulp.watch('./src/index.html',['copy-web']);
 
 });

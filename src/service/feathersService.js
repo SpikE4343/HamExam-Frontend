@@ -21,7 +21,7 @@ angular
           .configure(feathers.hooks())
           .configure(feathers.socketio(self.socket));
 
-      console.log(self.app);
+    //  console.log(self.app);
     };
 
     self.service = function( name ){

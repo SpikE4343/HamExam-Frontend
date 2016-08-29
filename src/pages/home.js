@@ -5,41 +5,19 @@ angular.module('app')
          '$mdDialog',
          '$mdSidenav',
          '$scope',
+         'pageService',
          HomeController]);
 
 function HomeController(
   feathersService,
   $mdDialog,
   $mdSidenav,
-  $scope) {
+  $scope,
+  pageService) {
 
   var self = this;
-  self.techExams = {
-    loading: true,
-    total: 0,
-    data:[]
-  };
 
-  var exams = feathersService.service('exams');
-  console.log(exams);
-
-  exams
-    .on('created', function(exam){
-      self.techExams.data.push( exam );
-      console.log(exam);
-      $scope.$apply();
-    });
-
-  exams
-    .find( { pool: 'tech'})
-    .then( function(examList) {
-      self.techExams = examList;
-      self.loading = false;
-      console.log(examList);
-      $scope.$apply();
-    });
-
-
+  self.pages = pageService.pages;
   self.isNavDrawerOpen = function() {
     return $mdSidenav('nav').isOpen() ||
            $mdSidenav('nav').isLockedOpen();

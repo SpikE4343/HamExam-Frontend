@@ -8,17 +8,24 @@ angular
 		var self = this;
     self.pages = [{
       name: 'Home',
-      icon: '',
-      url: '/home',
+      icon: 'home',
+      uiRoute: 'home',
       template: 'pages/home.html',
       controller: 'HomeController',
       controllerAs: 'c'
     },{
-      name: 'Exams',
-      icon: 'list',
-      url: '/exams',
-      template: 'pages/exams.html',
+      name: 'Question Pools',
+      icon: 'question_answer',
+      uiRoute: 'exampools',
+      template: 'pages/exampools.html',
       controller: 'ExamsController',
+      controllerAs: 'c'
+    },{
+      name: 'Exams',
+      icon: 'assignment',
+      uiRoute: 'exams',
+      template: 'pages/exams.html',
+      controller: 'ExamsPoolsController',
       controllerAs: 'c'
     }];
 	}
