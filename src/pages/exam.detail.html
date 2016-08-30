@@ -1,0 +1,31 @@
+<div layout="row" flex layout-fill>
+  <md-content flex layout-fill class="main-content">
+    <md-card ng-repeat="exam in c.examList.data">
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon">memory</md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{exam.name}}</span>
+          <span class="md-subhead">{{exam.created}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{exam._id}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button" aria-label="Edit">
+          <md-tooltip>Edit</md-tooltip>
+          <!-- ui-sref="radios.detail({ id: $index })" -->
+          <md-icon  >create</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Delete">
+          <md-tooltip>Delete</md-tooltip>
+          <md-icon >delete</md-icon>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </md-content>
+</div>

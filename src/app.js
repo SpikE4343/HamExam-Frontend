@@ -42,6 +42,19 @@ var app = angular
             controller: 'ExamsController',
             controllerAs: 'c'
         })
+        .state('exams.detail', {
+            //abstract: true,
+            url: '/:id',
+            //templateUrl: 'pages/home.html',
+            templateProvider: function($templateCache){
+              // simplified, expecting that the cache is filled
+              // there should be some checking... and async $http loading if not found
+              var t = $templateCache.get('pages/exam.detail.html');
+              return t;
+            },
+            controller: 'ExamsController',
+            controllerAs: 'c'
+        })
         .state('exampools', {
             //abstract: true,
             url: '/exampools',
