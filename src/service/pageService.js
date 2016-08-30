@@ -23,7 +23,7 @@ angular
     },{
       name: 'Exams',
       icon: 'assignment',
-      uiRoute: 'exams',
+      uiRoute: 'exams.list',
       template: 'pages/exams.html',
       controller: 'ExamsPoolsController',
       controllerAs: 'c'

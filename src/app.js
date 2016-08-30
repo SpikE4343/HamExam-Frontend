@@ -30,8 +30,16 @@ var app = angular
             controllerAs: 'c'
         })
         .state('exams', {
+          abstract: true,
+          url: '/exams',
+
+          // Note: abstract still needs a ui-view for its children to populate.
+          // You can simply add it inline here.
+          template: '<ui-view/>'
+        })
+        .state('exams.list', {
             //abstract: true,
-            url: '/exams',
+            url: '/list',
             //templateUrl: 'pages/home.html',
             templateProvider: function($templateCache){
               // simplified, expecting that the cache is filled
@@ -40,6 +48,19 @@ var app = angular
               return t;
             },
             controller: 'ExamsController',
+            controllerAs: 'c'
+        })
+        .state('exams.detail', {
+            //abstract: true,
+            url: '/:id',
+            //templateUrl: 'pages/home.html',
+            templateProvider: function($templateCache){
+              // simplified, expecting that the cache is filled
+              // there should be some checking... and async $http loading if not found
+              var t = $templateCache.get('pages/exam.detail.html');
+              return t;
+            },
+            controller: 'ExamDetailController',
             controllerAs: 'c'
         })
         .state('exampools', {
