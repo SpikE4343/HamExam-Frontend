@@ -3,29 +3,31 @@
     <md-card>
       <md-card-header>
         <md-card-avatar>
-          <md-icon class="md-avatar-icon">memory</md-icon>
+          <md-icon class="md-avatar-icon">list</md-icon>
         </md-card-avatar>
         <md-card-header-text>
-          <span class="md-title">{{exam.name}}</span>
-          <span class="md-subhead">{{exam.created}}</span>
+          <span class="md-title">{{c.exam.pool}}</span>
+          <span class="md-subhead">{{c.exam.createdAt}}</span>
         </md-card-header-text>
       </md-card-header>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{exam._id}}</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-icon-button" aria-label="Edit">
-          <md-tooltip>Edit</md-tooltip>
-          <!-- ui-sref="radios.detail({ id: $index })" -->
-          <md-icon  >create</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Delete">
-          <md-tooltip>Delete</md-tooltip>
-          <md-icon >delete</md-icon>
-        </md-button>
-      </md-card-actions>
+      <md-card-content>
+        <div flex ng-repeat="question in c.exam.questions">
+        <hr />
+        <h2>{{question.id}}.  {{question.question}}</h2>
+          <!-- <md-divider></md-divider> -->
+
+          <md-radio-group ng-model="question.choice" flex >
+            <md-radio-button flex
+                ng-value="$index"
+                class="md-primary"
+                ng-repeat='choice in question.choices' >
+              {{choice}}
+            </md-radio-button>
+          </md-radio-group>
+          <br />
+          <br />
+        </div>
+      </md-card-content>
     </md-card>
   </md-content>
 </div>

@@ -17,6 +17,7 @@ function ExamDetailController(
 
   self.dataLoaded = function(exam){
     self.exam = exam;
+    console.log(exam);
     $scope.$apply();
   };
 
