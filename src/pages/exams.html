@@ -1,5 +1,5 @@
 <div layout="row" flex layout-fill>
-  <md-content flex layout-fill class="main-content">
+  <md-content flex layout-fill class="card-holder main-content">
     <md-card ng-repeat="exam in c.examList.data">
       <md-card-header>
         <md-card-avatar>
@@ -11,15 +11,14 @@
         </md-card-header-text>
       </md-card-header>
       <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{exam._id}}</span>
-        </md-card-title-text>
+        <!-- <md-card-title-text>
+          <span class="md-headline">{{exam}}</span>
+        </md-card-title-text> -->
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
         <md-button class="md-icon-button" aria-label="Edit">
           <md-tooltip>Edit</md-tooltip>
-          <!-- ui-sref="radios.detail({ id: $index })" -->
-          <md-icon  >create</md-icon>
+          <md-icon  ui-sref="exams.detail({ id: exam._id })" >create</md-icon>
         </md-button>
         <md-button class="md-icon-button" aria-label="Delete">
           <md-tooltip>Delete</md-tooltip>
