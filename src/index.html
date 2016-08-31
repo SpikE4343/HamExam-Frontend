@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <title>HamExam</title>
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"> -->
@@ -13,8 +14,8 @@
 <body ng-app="app" ng-controller="IndexPageController" ng-cloak>
   <div layout="row" flex layout-fill>
     <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z1"
-                md-component-id="nav"
-                md-is-locked-open="$mdMedia('gt-sm')">
+                md-component-id="nav">
+                <!-- md-is-locked-open="$mdMedia('gt-sm')"> -->
       <md-toolbar class="md-whiteframe-z1"
                   layout="row">
         <div class="md-toolbar-tools" flex>
@@ -86,7 +87,7 @@
               <md-icon>save</md-icon>
             </md-button> -->
           </div>
-          <span flex></span>
+          <!-- <span flex></span> -->
           <h2><span>HamExam</span></h2>
           <span flex></span>
           <!-- <md-button class="md-icon-button" aria-label="Settings">
