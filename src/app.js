@@ -63,17 +63,38 @@ var app = angular
             controller: 'ExamDetailController',
             controllerAs: 'c'
         })
-        .state('exampools', {
+        .state('questionpools', {
+          abstract: true,
+          url: '/questionpools',
+
+          // Note: abstract still needs a ui-view for its children to populate.
+          // You can simply add it inline here.
+          template: '<flex ui-view layout-fill />'
+        })
+        .state('questionpools.list', {
             //abstract: true,
-            url: '/exampools',
+            url: '/list',
             //templateUrl: 'pages/home.html',
             templateProvider: function($templateCache){
               // simplified, expecting that the cache is filled
               // there should be some checking... and async $http loading if not found
-              var t = $templateCache.get('pages/exampools.html');
+              var t = $templateCache.get('pages/questionpools.html');
               return t;
             },
-            controller: 'ExamPoolsController',
+            controller: 'QuestionPoolsController',
+            controllerAs: 'c'
+        })
+        .state('questionpools.detail', {
+            //abstract: true,
+            url: '/:id',
+            //templateUrl: 'pages/home.html',
+            templateProvider: function($templateCache){
+              // simplified, expecting that the cache is filled
+              // there should be some checking... and async $http loading if not found
+              var t = $templateCache.get('pages/questionpool.detail.html');
+              return t;
+            },
+            controller: 'QuestionPoolDetailController',
             controllerAs: 'c'
         })
         ;

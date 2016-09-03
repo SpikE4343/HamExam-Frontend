@@ -20,15 +20,11 @@
     "angular-material-data-table": "^0.10.x",
     "angular-route": "~1.4.8",
     "angular-ui-router": "~0.2.15",
-    "angular": "^1.5.5",
-    "angular-material": "^1.x",
-    "feathers-client": "^1.5.2",
-    "socket.io-client": "^1.4.8",
+    "angular": "^1.5.x",
+    "angular-material": "^1.1.x",
+    "feathers-client": "^1.5.x",
+    "socket.io-client": "^1.4.x",
     "material-design-icons-iconfont": "~2.0.4"
-  },
-  "resolutions": {
-    "angular-material": "^1.0.9",
-    "angular": "~1.4.8"
   },
   "devDependencies": {}
 }

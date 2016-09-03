@@ -16,8 +16,8 @@ angular
     },{
       name: 'Question Pools',
       icon: 'question_answer',
-      uiRoute: 'exampools',
-      template: 'pages/exampools.html',
+      uiRoute: 'questionpools.list',
+      template: 'pages/questionpools.html',
       controller: 'ExamsController',
       controllerAs: 'c'
     },{
@@ -25,7 +25,7 @@ angular
       icon: 'assignment',
       uiRoute: 'exams.list',
       template: 'pages/exams.html',
-      controller: 'ExamsPoolsController',
+      controller: 'ExamsController',
       controllerAs: 'c'
     }];
 	}

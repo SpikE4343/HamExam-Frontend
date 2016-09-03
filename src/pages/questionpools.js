@@ -1,13 +1,13 @@
 
 angular.module('app')
-       .controller('ExamPoolsController',
+       .controller('QuestionPoolsController',
         ['feathersService',
          '$mdDialog',
          '$mdSidenav',
          '$scope',
-         ExamPoolsController]);
+         QuestionPoolsController]);
 
-function ExamPoolsController(
+function QuestionPoolsController(
   feathersService,
   $mdDialog,
   $mdSidenav,
@@ -20,15 +20,15 @@ function ExamPoolsController(
     data:[]
   };
 
-  var exampools = feathersService.service('questionpools');
+  self.questionpools = feathersService.service('questionpools');
 
-  exampools
+  self.questionpools
     .on('created', function(pool){
       self.pools.data.push( pool );
       $scope.$apply();
     });
 
-  exampools
+  self.questionpools
     .find()
     .then( function(pools) {
       self.pools = pools;

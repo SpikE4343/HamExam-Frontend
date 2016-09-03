@@ -1,0 +1,61 @@
+<div layout="row" flex layout-fill>
+
+  <md-sidenav class="md-sidenav-left md-whiteframe-z1"
+              md-is-locked-open="$mdMedia('gt-sm')">
+              <!-- md-component-id="nav" -->
+    <md-toolbar class="md-whiteframe-z1"
+                layout="row">
+      <div class="md-toolbar-tools" flex>
+        <md-button class="md-icon-button"
+                   aria-label="Settings">
+          <md-icon>menu</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-list>
+        <md-list-item
+          ng-repeat="subelement in c.pool.subElements"
+                      layout="row">
+                      <!-- ui-sref="{{page.uiRoute}}" -->
+                      <!-- ng-click="closeNavDrawer()"> -->
+            <!-- <md-icon >{{page.icon}}</md-icon> -->
+            <p class="md-body-2">{{subelement.id}}</p>
+        </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <md-content
+    class=" card-holder"
+    layout-align="center center">
+    <md-card  flex="80"  flex-xs="100" flex-sm="100" flex-md="90">
+      <md-card-title>
+         <md-card-title-text>
+           <!-- <span class="md-title">{{question.id}}</span> -->
+           <span class="md-title">{{c.pool.name}}</span>
+         </md-card-title-text>
+       </md-card-title>
+    </md-card>
+    <md-card  flex="80"  flex-xs="100" flex-sm="100" flex-md="90"
+      ng-repeat="subelement in c.pool.subElements">
+      <md-card-content>
+        <h2>{{subelement.name}}</h2>
+        <div ng-repeat="section in subelement.sections">
+          <span class="md-title">
+            <p class="md-body-2">{{section.id}}.</p> {{section.description}}</span>
+            <div layout-fill ng-repeat="question in section.questions">
+              <span class="md-title">
+                <p class="md-body-2">{{question.id}}.</p> {{question.question}}</span>
+                <md-radio-group ng-model="question.choice" flex >
+                  <md-radio-button flex
+                      ng-value="$index"
+                      class="md-primary"
+                      ng-repeat='choice in question.choices' >
+                    <span class="md-body-1">{{choice}}</span>
+                  </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+      </md-card-content>
+    </md-card>
+</div>
