@@ -35,7 +35,7 @@ var app = angular
 
           // Note: abstract still needs a ui-view for its children to populate.
           // You can simply add it inline here.
-          template: '<ui-view/>'
+          template: '<flex ui-view layout-fill />'
         })
         .state('exams.list', {
             //abstract: true,

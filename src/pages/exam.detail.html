@@ -1,7 +1,17 @@
 <div layout="row" flex layout-fill>
-  <md-content flex layout-fill class="card-holder main-content">
-    <md-card>
-      <md-card-header>
+  <md-content
+
+    class=" card-holder"
+    layout-align="center center">
+    <md-card  flex="80"  flex-xs="100" flex-sm="100" flex-md="90"
+      ng-repeat="question in c.exam.questions">
+      <md-card-title>
+         <md-card-title-text>
+           <!-- <span class="md-title">{{question.id}}</span> -->
+           <span class="md-title"><p class="md-body-2">{{question.id}}.</p> {{question.question}}</span>
+         </md-card-title-text>
+       </md-card-title>
+      <!-- <md-card-header>
         <md-card-avatar>
           <md-icon class="md-avatar-icon">list</md-icon>
         </md-card-avatar>
@@ -9,11 +19,11 @@
           <span class="md-title">{{c.exam.pool}}</span>
           <span class="md-subhead">{{c.exam.createdAt}}</span>
         </md-card-header-text>
-      </md-card-header>
+      </md-card-header> -->
       <md-card-content>
-        <div flex ng-repeat="question in c.exam.questions">
-        <hr />
-        <h2>{{question.id}}.  {{question.question}}</h2>
+        <div flex  >
+
+        <!-- <h2>{{question.id}}.  {{question.question}}</h2> -->
           <!-- <md-divider></md-divider> -->
 
           <md-radio-group ng-model="question.choice" flex >
@@ -21,13 +31,13 @@
                 ng-value="$index"
                 class="md-primary"
                 ng-repeat='choice in question.choices' >
-              {{choice}}
+              <span class="md-body-1">{{choice}}</span>
             </md-radio-button>
           </md-radio-group>
-          <br />
-          <br />
+          <!-- <br />
+          <br /> -->
         </div>
       </md-card-content>
     </md-card>
-  </md-content>
+  </div>
 </div>
