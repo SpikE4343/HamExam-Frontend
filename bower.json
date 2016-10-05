@@ -6,7 +6,7 @@
     "kk6ugn <kk6ugn@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/SpikE4343/ham.exam",
+  "homepage": "https://github.com/SpikE4343/HamExam-Frontend",
   "moduleType": [],
   "private": true,
   "ignore": [
@@ -18,13 +18,17 @@
   ],
   "dependencies": {
     "angular-material-data-table": "^0.10.x",
-    "angular-route": "~1.4.8",
-    "angular-ui-router": "~0.2.15",
-    "angular": "^1.5.x",
-    "angular-material": "^1.1.x",
+    "angular-route": "^1.4.x",
+    "angular-ui-router": "^0.2.15",
+    "angular": "~1.5.x",
+    "angular-material": "^1.x.x",
     "feathers-client": "^1.5.x",
     "socket.io-client": "^1.4.x",
-    "material-design-icons-iconfont": "~2.0.4"
+    "material-design-icons-iconfont": "^2.0.4",
+    "angular-material-sidemenu": "~1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "^1.5.8"
+  }
 }

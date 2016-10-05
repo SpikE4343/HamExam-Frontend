@@ -60,6 +60,7 @@ gulp.task('vendorJS', function(){
         './lib/angular-material/angular-material.js',
         './lib/angular-material-icons/angular-material-icons.min.js',
         './lib/angular-material-data-table/dist/md-data-table.min.js',
+        './lib/angular-material-sidemenu/dest/angular-material-sidemenu.js',
         './lib/socket.io-client/socket.io.js',
         //'./lib/feathers-client/dist/feathers.min.js',
         '!./lib/feathers-client/**/*.js'])
@@ -77,7 +78,8 @@ gulp.task('vendorCSS', function(){
     gulp.src([
         './lib/angular-material/angular-material.min.css',
         './lib/angular-material-icons/angular-material-icons.css',
-        './lib/angular-material-data-table/dist/md-data-table.min.css'])
+        './lib/angular-material-data-table/dist/md-data-table.min.css',
+        './lib/angular-material-sidemenu/dest/angular-material-sidemenu.css'])
         .pipe(plugins.concat('lib.min.css'))
         .pipe(plugins.cssnano())
         .pipe(gulp.dest(destlib));

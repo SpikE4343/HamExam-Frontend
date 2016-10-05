@@ -16,7 +16,7 @@ angular
     },{
       name: 'Question Pools',
       icon: 'question_answer',
-      uiRoute: 'questionpools.list',
+      uiRoute: 'questionpools',
       template: 'pages/questionpools.html',
       controller: 'ExamsController',
       controllerAs: 'c'

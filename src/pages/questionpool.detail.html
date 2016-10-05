@@ -1,60 +1,54 @@
 <div layout="row" flex layout-fill>
 
+
   <md-sidenav class="sub-sidenav detail-sidenav md-whiteframe-z1"
               md-is-locked-open="$mdMedia('gt-sm')"
               md-component-id="qp-nav">
-    <!-- <md-toolbar class="md-whiteframe-z1"
-                layout="row">
-      <div class="md-toolbar-tools" flex>
-        <md-button class="md-icon-button"
-                   aria-label="Settings">
-          <md-icon>menu</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar> -->
-
-    <md-list>
-        <md-list-item
-          ng-repeat="subelement in c.pool.subElements"
-                      layout="row">
-                      <!-- ui-sref="{{page.uiRoute}}" -->
-                      <!-- ng-click="closeNavDrawer()"> -->
-            <!-- <md-icon >{{page.icon}}</md-icon> -->
-            <p class="md-body-2">{{subelement.id}}</p>
-        </md-list-item>
-    </md-list>
+    <md-sidemenu>
+      <md-sidemenu-group>
+        <md-subheader class="md-no-sticky">Elements</md-subheader>
+        <md-sidemenu-content ng-repeat="subelement in c.pool.subElements"
+          md-heading="{{subelement.id}}" md-arrow="true">
+          <md-subheader class="md-no-sticky">Sections</md-subheader>
+          <md-sidemenu-button ng-repeat="section in subelement.sections"
+            ui-sref="questionpools.detail({ id: $stateParams.id, eleid: $parent.$index, $index })">{{section.id}}</md-sidemenu-button>
+        </md-sidemenu-content>
+      </md-sidemenu-group>
+    </md-sidemenu>
   </md-sidenav>
+
+
 
   <md-content
     class=" card-holder"
-    layout-align="center center">
+    layout-align="center center"
+    ui-view>
     <md-card  >
       <md-card-title>
          <md-card-title-text>
-           <!-- <span class="md-title">{{question.id}}</span> -->
            <span class="md-title">{{c.pool.name}}</span>
          </md-card-title-text>
        </md-card-title>
     </md-card>
-    <md-card ng-repeat="subelement in c.pool.subElements">
+    <md-card>
       <md-card-content>
-        <h2>{{subelement.id}}</h2>
-        <span class="md-title">{{subelement.description}}</span>
-        <div ng-repeat="section in subelement.sections">
-          <span class="md-title">
-            <p class="md-body-2">{{section.id}}.</p> {{section.description}}</span>
-            <div layout-fill ng-repeat="question in section.questions">
-              <span class="md-title">
-                <p class="md-body-2">{{question.id}}.</p> {{question.question}}</span>
-                <md-list ng-model="question.choice" flex >
-                  <md-list-item flex
+        <h4><h3>{{c.subelement.id}}.</h3> {{c.subelement.description}}</h4>
+        <section>
+          <md-subheader>{{c.section.id}}. {{c.section.description}}</md-subheader>
+            <md-list>
+              <md-list-item class="md-2-line" layout-fill layout="column" ng-repeat="question in c.section.questions">
+                <h3>{{question.id}}. {{question.question}}</h3>
+
+                <md-list ng-model="question.choice">
+                  <md-list-item class="md-1-line"
                       ng-class="{'md-primary' : choice.answer==$index}"
                       ng-repeat='choice in question.choices' >
                     <span class="md-body-1">{{choice}}</span>
                   </md-list-item>
                 </md-list>
-            </div>
-        </div>
+              </md-list-item>
+            </md-list>
+          </section>
       </md-card-content>
     </md-card>
 </div>

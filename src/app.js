@@ -2,6 +2,7 @@ var app = angular
   .module('app', [
     'ui.router',
     'ngMaterial',
+    'ngMaterialSidemenu',
     'md.data.table',
     'templates'
   ]).config(
@@ -64,9 +65,22 @@ var app = angular
             controllerAs: 'c'
         })
         .state('questionpools', {
-          abstract: true,
+          //abstract: true,
           url: '/questionpools',
 
+          resolve: {
+            pools: function($q, $stateParams, $scope){
+              var p = $q.defer();
+              var service = feathersService.service('questionpools');
+              service
+                .find()
+                .then(function(pools){
+                  p.resolve(pools);
+                  $scope.$apply();
+                });
+              return p.promise;
+            }
+          },
           // Note: abstract still needs a ui-view for its children to populate.
           // You can simply add it inline here.
           template: '<flex ui-view layout-fill />'
@@ -81,7 +95,16 @@ var app = angular
               var t = $templateCache.get('pages/questionpools.html');
               return t;
             },
-            controller: 'QuestionPoolsController',
+
+            resolve: {
+              pools: function(pools){
+                return pools;
+              }
+            },
+
+            controller: function($scope, pools){
+              $scope.pools = pools;
+            },
             controllerAs: 'c'
         })
         .state('questionpools.detail', {
