@@ -56,6 +56,7 @@ gulp.task('vendorJS', function(){
         './lib/angular/angular.js',
         './lib/angular-ui-router/release/angular-ui-router.js',
         './lib/angular-animate/angular-animate.js',
+        './lib/ng-file-upload/ng-file-upload.min.js',
         './lib/angular-aria/angular-aria.js',
         './lib/angular-material/angular-material.js',
         './lib/angular-material-icons/angular-material-icons.min.js',

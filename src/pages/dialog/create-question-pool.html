@@ -1,0 +1,59 @@
+<md-dialog aria-label="Create Question Pool">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Create</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="c.cancel()">
+          <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content layout="column" layout-padding>
+      <md-content layout-gt-sm="row" layout-padding>
+        <div>
+          <md-input-container>
+            <label>Name</label>
+            <input ng-model="c.data.name" required>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Tag</label>
+            <input ng-model="c.data.tag" required>
+          </md-input-container>
+        </div>
+      </md-content>
+
+      <md-content layout-padding>
+        <md-input-container>
+          <label>Source URL</label>
+          <input ng-model="c.data.url" required>
+        </md-input-container>
+
+        <div ngf-drop ngf-select ng-model="file" class="drop-box"
+            ngf-multiple="false" ngf-allow-dir="false"
+            ngf-drag-over-class="'dragover'"
+            accept="image/*,text/plain"
+            ngf-pattern="'image/*,text/plain'">
+
+            <p ng-hide="file != null">Drop Question Pool txt file here or click to upload</p>
+        </div>
+      </md-content>
+
+      <!--
+      name: { type: String, required: true, unique: true },
+      tag: { type: String, required: true },
+      active: Boolean,
+      url: String,
+      -->
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-disabled='c.invalid' ng-click="c.create()">
+        Create
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

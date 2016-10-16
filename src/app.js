@@ -1,6 +1,7 @@
 var app = angular
   .module('app', [
     'ui.router',
+    'ngFileUpload',
     'ngMaterial',
     'ngMaterialSidemenu',
     'md.data.table',
@@ -65,18 +66,18 @@ var app = angular
             controllerAs: 'c'
         })
         .state('questionpools', {
-          //abstract: true,
+          abstract: true,
           url: '/questionpools',
 
           resolve: {
-            pools: function($q, $stateParams, $scope){
+            pools: function($q, feathersService ){
               var p = $q.defer();
               var service = feathersService.service('questionpools');
               service
                 .find()
                 .then(function(pools){
                   p.resolve(pools);
-                  $scope.$apply();
+                  //$scope.$apply();
                 });
               return p.promise;
             }
@@ -96,20 +97,46 @@ var app = angular
               return t;
             },
 
-            resolve: {
-              pools: function(pools){
-                return pools;
-              }
-            },
+            controller: function($scope, pools, feathersService, $mdDialog, $templateCache){
+              $scope.c = {'pools': pools};
 
-            controller: function($scope, pools){
-              $scope.pools = pools;
+              service = feathersService.service('questionpools');
+              service.on('created', function(pool){
+                $scope.c.pools.data.push( pool );
+                $scope.$apply();
+              });
+
+              // service.on('removed', function(pool){
+              //   $scope.c.pools.data.push( pool );
+              // });
+
+              $scope.showCreateDialog = function(ev) {
+                $mdDialog.show({
+                  controller: 'CreateQuestionPoolDialogController',
+                  controllerAs: 'c',
+                  template: $templateCache.get('pages/dialog/create-question-pool.html'),
+                  parent: angular.element(document.body),
+                  targetEvent: ev,
+                  clickOutsideToClose:true,
+                  fullscreen: true // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                  service.create( answer );
+                }, function() {
+
+                });
+              };
+
+              $scope.deletePool = function(pool){
+                service.remove(pool._id);
+              };
+
             },
-            controllerAs: 'c'
+            //controllerAs: 'c'
         })
         .state('questionpools.detail', {
             //abstract: true,
-            url: '/:id',
+            url: '/{id}/{eleid:int}/{subid:int}',
             //templateUrl: 'pages/home.html',
             templateProvider: function($templateCache){
               // simplified, expecting that the cache is filled
@@ -130,6 +157,11 @@ var app = angular
         //.primaryPalette('orange')
         //.dark()
         ;
+
+    $mdThemingProvider
+       .theme('docs-dark', 'default')
+       .primaryPalette('yellow')
+       .dark();
 });
 
 app.controller("IndexPageController", [

@@ -12,21 +12,24 @@ angular
       uiRoute: 'home',
       template: 'pages/home.html',
       controller: 'HomeController',
-      controllerAs: 'c'
+      controllerAs: 'c',
+			showOnHomePage: false
     },{
       name: 'Question Pools',
       icon: 'question_answer',
-      uiRoute: 'questionpools',
+      uiRoute: 'questionpools.list',
       template: 'pages/questionpools.html',
       controller: 'ExamsController',
-      controllerAs: 'c'
+      controllerAs: 'c',
+			showOnHomePage: true
     },{
       name: 'Exams',
       icon: 'assignment',
       uiRoute: 'exams.list',
       template: 'pages/exams.html',
       controller: 'ExamsController',
-      controllerAs: 'c'
+      controllerAs: 'c',
+			showOnHomePage: true
     }];
 	}
 ]);
