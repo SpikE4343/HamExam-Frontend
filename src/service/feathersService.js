@@ -19,8 +19,19 @@ angular
       self.socket = io(hostUrl);
       self.app = feathers()
           .configure(feathers.hooks())
-          .configure(feathers.socketio(self.socket));
+          .configure(feathers.socketio(self.socket))
+          .configure(feathers.authentication({ storage: window.localStorage }))
+          ;
 
+      self.app.authenticate({
+        type: 'token',
+        endpoint: '/auth/google'
+      }).then( function(result){
+        console.log(result);
+        console.log('token='+self.app.get('token'));
+      }).catch(function(error){
+        console.error('Error authenticating!', error);
+      });
     //  console.log(self.app);
     };
 
@@ -34,6 +45,7 @@ angular
 
 		//if( process.env.NODE_ENV==='production')
 		// TODO: data drive in some way. selectable?
-    self.connect('http://hamexam.herokuapp.com');
+    //self.connect('http://hamexam.herokuapp.com');
+    self.connect('http://localhost:3030');
 	}
 ]);
