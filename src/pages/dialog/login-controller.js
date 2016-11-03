@@ -10,5 +10,5 @@ angular.module('app')
 function LoginDialogController(
   $scope, feathersService, $mdDialog, $window) {
   var self = this;
-
+  self.authurl = feathersService.hostUrl + '/auth/google';
 }
