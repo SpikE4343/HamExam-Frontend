@@ -22,8 +22,8 @@ angular
           .configure(feathers.hooks())
           .configure(feathers.socketio(self.socket))
           .configure(feathers.authentication({
-            storage: window.localStorage}
-          })
+            storage: window.localStorage
+          }))
           ;
 
       // self.app.authenticate({
