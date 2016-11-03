@@ -23,7 +23,7 @@ angular
           .configure(feathers.socketio(self.socket))
           .configure(feathers.authentication({
             storage: window.localStorage}
-          }))
+          })
           ;
 
       // self.app.authenticate({
