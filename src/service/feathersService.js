@@ -51,12 +51,14 @@ angular
     };
 
     self.authenticate = function(){
-      self.app.authenticate().then( function(result){
-        console.log(result);
-        console.log('token='+self.app.get('token'));
-      }).catch(function(error){
-        console.error('Error authenticating!', error);
-      });
+      self.app
+          .authenticate()
+          .then( function(result){
+            console.log(result);
+            console.log('token='+self.app.get('token'));
+          }).catch(function(error){
+            console.error('Error authenticating!', error);
+          });
     };
 
 		//if( process.env.NODE_ENV==='production')
