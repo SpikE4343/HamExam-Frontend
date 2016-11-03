@@ -17,21 +17,25 @@ angular
 			}
 
       self.socket = io(hostUrl);
-      self.app = feathers()
+      self.app =
+        feathers()
           .configure(feathers.hooks())
           .configure(feathers.socketio(self.socket))
-          .configure(feathers.authentication({ storage: window.localStorage }))
+          .configure(feathers.authentication({
+            storage: window.localStorage,
+            cookie: {name: 'hameexam-jwt', httpOnly:false, secure:false}
+          }))
           ;
 
-      self.app.authenticate({
-        type: 'token',
-        endpoint: '/auth/google'
-      }).then( function(result){
-        console.log(result);
-        console.log('token='+self.app.get('token'));
-      }).catch(function(error){
-        console.error('Error authenticating!', error);
-      });
+      // self.app.authenticate({
+      //   type: 'token',
+      //   endpoint: '/auth/google'
+      // }).then( function(result){
+      //   console.log(result);
+      //   console.log('token='+self.app.get('token'));
+      // }).catch(function(error){
+      //   console.error('Error authenticating!', error);
+      // });
     //  console.log(self.app);
     };
 
@@ -41,6 +45,22 @@ angular
 
     self.connected = function(){
       return self.socket !== null;
+    };
+
+    self.loginValid = function() {
+      return self.app.get('token') !== undefined;
+    };
+
+    self.authenticate = function(){
+      self.app.authenticate({
+        type: 'token',
+        tokenEndpoint: '/auth/google'
+      }).then( function(result){
+        console.log(result);
+        console.log('token='+self.app.get('token'));
+      }).catch(function(error){
+        console.error('Error authenticating!', error);
+      });
     };
 
 		//if( process.env.NODE_ENV==='production')

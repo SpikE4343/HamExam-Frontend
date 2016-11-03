@@ -1,6 +1,7 @@
 var app = angular
   .module('app', [
     'ui.router',
+    'ngCookies',
     'ngFileUpload',
     'ngMaterial',
     'ngMaterialSidemenu',
@@ -29,7 +30,18 @@ var app = angular
               return t;
             },
             controller: 'HomeController',
-            controllerAs: 'c'
+            controllerAs: 'c',
+            data: {
+              requireLogin: true
+            }
+        })
+        .state('loginsuccess', {
+          url: '/loginsuccess',
+          controller: function($state, $cookies, feathersService){
+            console.log($cookies.get('feathers-jwt'));
+            feathersService.authenticate();
+            $state.go('home');
+          }
         })
         .state('exams', {
           abstract: true,
@@ -195,3 +207,27 @@ app.controller("IndexPageController", [
    }
 
  ]);
+
+ // app.js
+
+app.run(function ($rootScope, $state, loginModal, feathersService) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    if( toState.data === undefined )
+      return;
+    var requireLogin = toState.data.requireLogin;
+    var preventDisplay = toState.data.preventDisplay;
+
+    if (requireLogin && !feathersService.loginValid() ) {
+      if( preventDisplay )
+        event.preventDefault();
+
+       loginModal(event)
+         .then(function () {
+           return $state.go(toState.name, toParams);
+         })
+         .catch(function () {
+           return $state.go('home');
+         });
+       }
+   });
+});

@@ -53,12 +53,13 @@ gulp.task('css', function(){
 gulp.task('vendorJS', function(){
     //concatenate vendor JS files
     gulp.src([
-        './lib/angular/angular.js',
-        './lib/angular-ui-router/release/angular-ui-router.js',
-        './lib/angular-animate/angular-animate.js',
+        './lib/angular/angular.min.js',
+        './lib/angular-ui-router/release/angular-ui-router.min.js',
+        './lib/angular-animate/angular-animate.min.js',
+        './lib/angular-cookies/angular-cookies.min.js',
         './lib/ng-file-upload/ng-file-upload.min.js',
         './lib/angular-aria/angular-aria.js',
-        './lib/angular-material/angular-material.js',
+        './lib/angular-material/angular-material.min.js',
         './lib/angular-material-icons/angular-material-icons.min.js',
         './lib/angular-material-data-table/dist/md-data-table.min.js',
         './lib/angular-material-sidemenu/dest/angular-material-sidemenu.js',
