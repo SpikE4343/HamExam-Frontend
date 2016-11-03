@@ -22,8 +22,7 @@ angular
           .configure(feathers.hooks())
           .configure(feathers.socketio(self.socket))
           .configure(feathers.authentication({
-            storage: window.localStorage,
-            cookie: {name: 'hamexam-jwt', httpOnly:false, secure:false}
+            storage: window.localStorage}
           }))
           ;
 
@@ -52,10 +51,7 @@ angular
     };
 
     self.authenticate = function(){
-      self.app.authenticate({
-        type: 'token',
-        tokenEndpoint: '/auth/google'
-      }).then( function(result){
+      self.app.authenticate().then( function(result){
         console.log(result);
         console.log('token='+self.app.get('token'));
       }).catch(function(error){
