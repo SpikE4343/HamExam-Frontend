@@ -23,7 +23,7 @@ angular
           .configure(feathers.socketio(self.socket))
           .configure(feathers.authentication({
             storage: window.localStorage,
-            cookie: {name: 'hameexam-jwt', httpOnly:false, secure:false}
+            cookie: {name: 'hamexam-jwt', httpOnly:false, secure:false}
           }))
           ;
 
