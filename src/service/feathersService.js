@@ -64,7 +64,7 @@ angular
 
 		//if( process.env.NODE_ENV==='production')
 		// TODO: data drive in some way. selectable?
-    self.connect('http://hamexam.herokuapp.com');
-    //self.connect('http://localhost:3030');
+    //self.connect('http://hamexam.herokuapp.com');
+    self.connect('http://parrot-loc.com:3030');
 	}
 ]);

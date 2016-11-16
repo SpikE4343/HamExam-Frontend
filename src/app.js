@@ -38,6 +38,7 @@ var app = angular
         .state('loginsuccess', {
           url: '/loginsuccess',
           controller: function($state, $cookies, feathersService){
+            console.log('doc.cook:'+document.cookie);
             console.log('cookie:'+$cookies.get('hamexam-jwt'));
             feathersService.authenticate();
             $state.go('home');
